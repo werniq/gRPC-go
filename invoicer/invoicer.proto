@@ -1,0 +1,26 @@
+// specifying syntax
+syntax = "proto3";
+
+//
+option go_package = "github.com/werniq/gRPC-go/invoicer";
+
+message Amount {
+  int64 amount = 1;
+  string currency = 2;
+}
+
+message CreateRequest {
+  Amount amount = 1;
+  string from = 2;
+  string to = 3;
+}
+
+message CreateResponseMessage {
+  bytes pdf = 1;
+  bytes docx = 2;
+}
+
+service Invoicer {
+  rpc Create(CreateRequest) returns (CreateResponseMessage);
+
+}
